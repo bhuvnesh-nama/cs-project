@@ -1,0 +1,53 @@
+# CREATE DATABASE IF NOT EXISTS port_management;
+
+# CREATE TABLE IF NOT EXISTS Ships (
+#     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+#     name VARCHAR(255) NOT NULL,
+#     type VARCHAR(255) NOT NULL,
+#     weight DECIMAL(10,3) NOT NULL,
+#     flag VARCHAR(255) NOT NULL,
+#     capacity INT NOT NULL,
+#     arrival_date DATE NOT NULL,
+#     departure_date DATE,
+#     status VARCHAR(255) NOT NULL
+# );
+
+# CREATE TABLE IF NOT EXISTS Cargos(
+#     cargot_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+#     cargo_type VARCHAR(255) NOT NULL,
+#     weight DECIMAL(10,3) NOT NULL,
+#     origin VARCHAR(255) NOT NULL,
+#     destination VARCHAR(255) NOT NULL,
+#     storage_zone VARCHAR(255) NOT NULL,
+#     ship_id INT NOT NULL,
+#     status VARCHAR(255) NOT NULL)
+
+# CREATE TABLE IF NOT EXISTS Passengers(
+#     passenger_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+#     name VARCHAR(255) NOT NULL,
+#     age INT NOT NULL,
+#     passport_no VARCHAR(255) NOT NULL,
+#     boarding_date DATE NOT NULL,
+#     disembark_date DATE NOT NULL,
+#     gender VARCHAR(255) NOT NULL,
+#     origin VARCHAR(255) NOT NULL,
+#     destination VARCHAR(255) NOT NULL,
+#     ship_id INT NOT NULL,
+#     status VARCHAR(255) NOT NULL)
+
+# CREATE TABLE IF NOT EXISTS Crews(
+#     crew_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+#     name VARCHAR(255) NOT NULL,
+#     age INT NOT NULL,
+#     role VARCHAR(255) NOT NULL,
+#     origin VARCHAR(255) NOT NULL,
+#     start_date DATE NOT NULL,
+#     end_date DATE,
+#     ship_id INT NOT NULL)
+
+# CREATE TABLE IF NOT EXISTS Docking_Schedules(
+#     schedule_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+#     arrival_date DATE NOT NULL,
+#     status VARCHAR(255) NOT NULL,
+#     departure_date DATE,
+#     ship_id INT NOT NULL)

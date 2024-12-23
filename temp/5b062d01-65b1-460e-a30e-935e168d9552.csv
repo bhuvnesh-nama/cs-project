@@ -1,0 +1,3 @@
+id,name,type,weight,flag,capacity,arrival_date,departure_date,status
+1,Titanic,Cargo,1.50,India,8,2024-12-22,2820-09-07,Upcomming
+2,Titanic,Cargo,1.50,India,8,2024-12-22,2820-09-07,Upcomming
