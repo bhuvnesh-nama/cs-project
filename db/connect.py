@@ -1,6 +1,13 @@
 import mysql.connector
 from mysql.connector import Error
 
+DATABASE = {
+    "host": "localhost",
+    "user": "root",
+    "password": "0141",
+    "database": "test"
+}
+
 class Database:
     _connection = None
     _cursor = None
@@ -10,10 +17,10 @@ class Database:
         if Database._connection is None:
             try:
                 Database._connection = mysql.connector.connect(
-                    host="localhost",  # Replace with your host
-                    user="root",       # Replace with your username
-                    password="0141",       # Replace with your password
-                    database="test"  # Replace with your database name
+                    host=DATABASE["host"],
+                    user=DATABASE["user"],
+                    password=DATABASE["password"],
+                    database=DATABASE["database"]
                 )
                 if Database._connection.is_connected():
                     print("Database connected successfully.")

@@ -1,32 +1,25 @@
 from db import fields
 from db.connect import Database
-
 from db.fields import Field
 
 class BaseModel:
 
+    # This constructor is for insert purpose
     def __init__(self, **kwargs):
         for key, value in kwargs.items():
             setattr(self, key, value)
 
+    # This class method is for insert purpose
     def save(self):
         cursor = Database.cursor()
 
-        columns = list(self.__dict__.keys())
-        values = list(self.__dict__.values())
+        
+        columns = ", ".join(self.__dict__.keys())
+        data = ", ".join(["%s"]* len(self.__dict__.values()))
 
-        if hasattr(self, "id") and self.id:
-            set_clause = ", ".join([f"{column} = %s" for column in columns])
-            query = f"UPDATE {self.__class__.__name__.lower()} SET {set_clause} WHERE id = %s"
-            values.append(self.id) # id append for where clause
-            cursor.execute(query, tuple(values))
-            Database.commit()
-        else:
-            data = ", ".join(["%s"]* len(self.__dict__))
-
-            query = f"INSERT INTO {self.__class__.__name__.lower()} ({columns}) VALUES ({data})"
-            cursor.execute(query, tuple(self.__dict__.values()))
-            Database.commit()
+        query = f"INSERT INTO {self.__class__.__name__.lower()} ({columns}) VALUES ({data})"
+        cursor.execute(query, tuple(self.__dict__.values()))
+        Database.commit()
 
 
 
@@ -62,15 +55,30 @@ class BaseModel:
             query = f"SELECT * FROM {cls.__name__.lower()} WHERE {where_clause}"
             cursor.execute(query, tuple(kwargs.values()))
         data = cursor.fetchall()
+        # data = tuple(data)
         return data
     
-    
+    @classmethod
+    def update_by_id(cls, id, **updated_data):
+        cursor = Database.cursor()
+        set_clause = ", ".join(f"{key}=%s" for key in updated_data.keys())
 
+        where_clause = f"id=%s"
+
+        query = f"UPDATE {cls.__name__.lower()} SET {set_clause} WHERE {where_clause}"
+        cursor.execute(query, tuple(updated_data.values()) + (id,))
+        Database.commit()
+    
+    @classmethod
+    def delete_by_id(cls, id):
+        cursor = Database.cursor()
+        query = f"DELETE FROM {cls.__name__.lower()} WHERE id=%s"
+
+        cursor.execute(query, (id,))
 
 class Ship(BaseModel):
     id = fields.Integer(primary_key=True, auto_increment=True)
     name = fields.CharField(null=False)
-    type = fields.CharField(null=False)
     weight = fields.DecimalField(null=False)
     flag = fields.CharField(null=False)
     capacity = fields.Integer(null=False)
@@ -78,42 +86,19 @@ class Ship(BaseModel):
     departure_date = fields.DateField()
     status = fields.CharField()
 
-class Cargo(BaseModel):
+class Container(BaseModel):
     id = fields.Integer(primary_key=True, auto_increment=True)
-    cargo_type = fields.CharField(null=False)
     weight = fields.DecimalField(null=False)
-    origin = fields.CharField(null=False)
-    destination = fields.CharField(null=False)
-    storage_zone = fields.CharField(null=False)
-    ship_id = fields.ForeignField(to=Ship, to_field="id")
-    status = fields.CharField(null=False)
-
-class Passenger(BaseModel):
-    id = fields.Integer(primary_key=True, auto_increment=True)
-    name = fields.CharField(null=False)
-    age = fields.Integer(null=False)
-    passport_no = fields.CharField(null=False)
-    boarding_date = fields.DateField(null=False)
-    disembark_date = fields.DateField(null=False)
-    gender = fields.CharField(null=False)
-    origin = fields.CharField(null=False)
-    destination = fields.CharField(null=False)
-    ship_id = fields.ForeignField(to=Ship, to_field="id")
-    status = fields.CharField(null=False)
-
-class Crew(BaseModel):
-    id = fields.Integer(primary_key=True, auto_increment=True)
-    name = fields.CharField(null=False)
-    age = fields.Integer(null=False)
-    role = fields.CharField(null=False)
-    origin = fields.CharField(null=False)
-    start_date = fields.DateField(null=False)
-    end_date  = fields.DateField()
+    storage_zone_id = fields.CharField(null=False)
     ship_id = fields.ForeignField(to=Ship, to_field="id")
 
 class DockingSchedule(BaseModel):
     id = fields.Integer(primary_key=True, auto_increment=True)
-    arrival_date = fields.DateField(null=False)
+    schedule_date = fields.DateField(null=False)
     status = fields.CharField(null=False)
-    departure_date = fields.DateField()
     ship_id = fields.ForeignField(to=Ship, to_field="id")
+
+class StorageZone(BaseModel):
+    id = fields.Integer(primary_key=True, auto_increment=True)
+    name = fields.CharField(null=False)
+    max_capacity = fields.Integer(null=False)
