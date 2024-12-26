@@ -7,6 +7,12 @@ from helper import clear_console,warning_msg
 
 def ship_controller():
     while True:
+        clear_console()
+        print()
+        print("--------------------------------------------------")
+        print("-------           Ship Management          -------")
+        print("--------------------------------------------------")
+
         print()
         print("1. Add new Ship")
         print("2. Get all Ships")
@@ -44,6 +50,11 @@ def ship_controller():
 
 def docking_controller():
     while True:
+        clear_console()
+        print()
+        print("--------------------------------------------------")
+        print("-------        Docking Management          -------")
+        print("--------------------------------------------------")
         print()
         print("1. Get Today Docking Schedules")
         print("2. Export Todays Docking Schedules")
@@ -78,6 +89,11 @@ def docking_controller():
 
 def storage_zone_controller():
     while True:
+        clear_console()
+        print()
+        print("--------------------------------------------------")
+        print("-------       Storage Zone Mangement       -------")
+        print("--------------------------------------------------")
         print()
         print("1. Add new storage zone")
         print("2. Get all storage zone")
@@ -104,6 +120,11 @@ def storage_zone_controller():
             
 def container_controller():
     while True:
+        clear_console()
+        print()
+        print("--------------------------------------------------")
+        print("-------       Container Management         -------")
+        print("--------------------------------------------------")
         print()
         print("1. Add new container")
         print("2. Show all containers")

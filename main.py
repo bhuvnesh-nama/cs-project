@@ -22,9 +22,13 @@ def main():
     # print("--------------------------------------------------")
     
 
-    print(pyfiglet.figlet_format("Welcome To Port Management",font="small"))
-
+    error = False
     while True:
+        clear_console()
+        if error:
+            danger_msg(error)
+            error = False
+        print(pyfiglet.figlet_format("Welcome To Port Management",font="small"))
         print("1. Ship Management")
         print("2. Docking Management")
         print("3. Storage Zone Management")
@@ -33,44 +37,22 @@ def main():
         print("99. Exit")
         print()
 
-        user = int(input(">"))
-        
-        if user == 1:
-            clear_console()
-            print()
-            print("--------------------------------------------------")
-            print("-------           Ship Management          -------")
-            print("--------------------------------------------------")
-
-            ship_controller()
-        elif user == 2:
-            clear_console()
-            print()
-            print("--------------------------------------------------")
-            print("-------        Docking Management          -------")
-            print("--------------------------------------------------")
-            
-            docking_controller()
-        elif user ==3:
-            clear_console()
-            print()
-            print("--------------------------------------------------")
-            print("-------       Storage Zone Mangement       -------")
-            print("--------------------------------------------------")
-            
-            storage_zone_controller()
-        elif user ==4:
-            clear_console()
-            print()
-            print("--------------------------------------------------")
-            print("-------       Container Management         -------")
-            print("--------------------------------------------------")
-            
-            container_controller()
-        elif user == 99:
-            break
-        else:
-            warning_msg("Invalid Operation!")
+        try:
+            user = int(input(">"))
+            if user == 1:
+                ship_controller()
+            elif user == 2:
+                docking_controller()
+            elif user ==3:
+                storage_zone_controller()
+            elif user ==4:
+                container_controller()
+            elif user == 99:
+                break
+            else:
+                warning_msg("Invalid Operation!")
+        except ValueError:
+            error = "Enter a number"
     
 
 if __name__ == "__main__":
