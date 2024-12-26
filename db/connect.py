@@ -5,7 +5,7 @@ DATABASE = {
     "host": "localhost",
     "user": "root",
     "password": "0141",
-    "database": "test"
+    "database": "port_management"
 }
 
 class Database:
