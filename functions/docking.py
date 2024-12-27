@@ -7,8 +7,6 @@ import csv
 random_value = uuid4()
 todays_date = datetime.now().strftime("%Y-%m-%d")
 
-def get_all_docking_schedule():
-    pass
 
 def add_new_docking_schedule():
     clear_console()

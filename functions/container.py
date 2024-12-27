@@ -8,6 +8,11 @@ def add_new_container():
     ship_id = int(input("Ship id :"))
 
     storage_zone_exists= StorageZone.get(id=storage_zone_id)
+    containers_in_zone = Container.get(storage_zone_id=storage_zone_id)
+    if len(containers_in_zone) >= storage_zone_exists[0][2]:
+        warning_msg("Storage full")
+        input("Enter to quit")
+        return
     if not storage_zone_exists:
         warning_msg("Storage zone not exists")
         return
@@ -15,14 +20,13 @@ def add_new_container():
 
     if not ship_exists:
         warning_msg("Ship not exists")
-
+        return
     if ship_exists and storage_zone_exists:
         container = Container(weight=weight,storage_zone_id=storage_zone_id, ship_id=ship_id)
         container.save()
 
 
 def show_all_containers():
-    clear_console()
     containers = Container.get()
     print("-"*58)
     print("|    id    |    weight    |  storage_zone_id |  ship_id  |")
@@ -30,6 +34,7 @@ def show_all_containers():
     for container in containers:
         show_container_data(container)
     print("-"*58)
+    input("Enter to quit :")
     
 def update_container():
     clear_console()

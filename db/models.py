@@ -86,19 +86,20 @@ class Ship(BaseModel):
     departure_date = fields.DateField()
     status = fields.CharField()
 
+class StorageZone(BaseModel):
+    id = fields.Integer(primary_key=True, auto_increment=True)
+    name = fields.CharField(null=False)
+    max_capacity = fields.Integer(null=False)
+
 class Container(BaseModel):
     id = fields.Integer(primary_key=True, auto_increment=True)
     weight = fields.DecimalField(null=False)
-    storage_zone_id = fields.CharField(null=False)
-    ship_id = fields.ForeignField(to=Ship, to_field="id")
+    storage_zone_id = fields.ForeignField(to=StorageZone,name="storage_zone_id", to_field="id")
+    ship_id = fields.ForeignField(to=Ship,name="ship_id", to_field="id")
 
 class DockingSchedule(BaseModel):
     id = fields.Integer(primary_key=True, auto_increment=True)
     schedule_date = fields.DateField(null=False)
     status = fields.CharField(null=False)
-    ship_id = fields.ForeignField(to=Ship, to_field="id")
+    ship_id = fields.ForeignField(to=Ship,name="ship_id", to_field="id")
 
-class StorageZone(BaseModel):
-    id = fields.Integer(primary_key=True, auto_increment=True)
-    name = fields.CharField(null=False)
-    max_capacity = fields.Integer(null=False)

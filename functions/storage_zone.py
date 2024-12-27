@@ -4,7 +4,7 @@ from helper import *
 
 def add_new_storage_zone():
     clear_console()
-    name = input("Name :")
+    name = input("Name :").upper()
     max_capacity = int(input("Max Capacity (in containers) :"))
 
     storage_zone = StorageZone(name=name, max_capacity=max_capacity)

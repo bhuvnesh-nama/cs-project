@@ -62,7 +62,7 @@ class DecimalField(Field):
 
 class Boolean(Field):
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)  # Pass all kwargs to the parent class
+        super().__init__(**kwargs)
 
     def get_sql(self):
         sql = "BOOLEAN"
@@ -75,18 +75,21 @@ class Boolean(Field):
         return sql
 
 class ForeignField(Field):
-    def __init__(self,to, to_field="id", **kwargs):
+    def __init__(self,to,name, to_field="id", **kwargs):
         super().__init__(**kwargs)
         self.to = to
         self.to_field = to_field
+        self.name = name
 
+    
     def get_sql(self):
         sql = "INT"
         if not self.null:
             sql += " NOT NULL"
         if self.unique:
             sql += " UNIQUE"
-        sql += f", FOREIGN KEY ({self.to_field}) REFERENCES {self.to.__name__.lower()}({self.to_field})"
+        # sql += f", FOREIGN KEY ({self.to_field}) REFERENCES {self.to.__name__.lower()}({self.to_field})"
+        sql += f", FOREIGN KEY ({self.name}) REFERENCES {self.to.__name__.lower()}({self.to_field})"
         return sql
 
 class DateField(Field):

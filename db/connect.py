@@ -26,6 +26,7 @@ class Database:
                     print("Database connected successfully.")
             except Error as e:
                 print(f"Error connecting to MySQL: {e}")
+                exit()
         return Database._connection
 
     @staticmethod
