@@ -1,3 +1,4 @@
+# This file is the Entry Point of the Program
 from db.connect import Database
 from settings import MigrationManager
 import sys
@@ -6,6 +7,8 @@ import pyfiglet
 
 # Importing Controllers
 from controllers import *
+
+# Main Function/ Starting Function of Program
 def main():
     Database.get_connection()
 
@@ -16,12 +19,6 @@ def main():
             if is_migrated:
                 print("Migration successfully!")
                 exit()
-    
-    # print("--------------------------------------------------")
-    # print("-------           Ship Management          -------")
-    # print("--------------------------------------------------")
-    
-
     error = False
     while True:
         clear_console()

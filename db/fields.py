@@ -1,6 +1,6 @@
+# creating fields that return the part of the sql query when executing the function of the particular field class
 
-
-
+# Base Field
 class Field:
     def __init__(self,primary_key=False, unique=False, null=True, **kwargs):
         self.null = null
@@ -69,7 +69,6 @@ class Boolean(Field):
         if not self.null:
             sql += " NOT NULL"
         
-        # Example of using a custom argument from kwargs
         if 'default' in self.extra_args:
             sql += f" DEFAULT {self.extra_args['default']}"
         return sql

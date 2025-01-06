@@ -1,17 +1,14 @@
+# Functions For Ship Management
 from db.models import Ship
 import csv
 from datetime import datetime
 import uuid
-
 from helper import show_ship_data,success_msg,danger_msg,warning_msg,clear_console
-
 
 random_value = uuid.uuid4()
 todays_date = datetime.now().strftime("%Y-%m-%d")
 
-
-    
-
+# To Add New Ship
 def add_new_ship():
     name = input("Name :")
     weight = float(input("Weight (in tons) :"))
@@ -26,6 +23,8 @@ def add_new_ship():
     ship.save()
 
     success_msg("Ship Addedd Successfully!")
+
+# To Get All Ships
 def get_all_ships():
     clear_console()
     data = Ship.get()
@@ -38,6 +37,7 @@ def get_all_ships():
     print("-" * 119)
     input("enter to quit:")
 
+# To Export All Ships Into CSV File
 def export_all_ship_data_into_csv(path):
     data = Ship.get()
     with open(f"{path}\\{random_value}.csv", "w", newline="") as file:
@@ -46,7 +46,8 @@ def export_all_ship_data_into_csv(path):
         writer.writerows(data)
     
     success_msg("Data exported successfully!")
-        
+
+# To Get All Ships That Arrives Today
 def get_ships_arrives_today():
     clear_console()
     data = Ship.get(arrival_date=todays_date)
@@ -59,6 +60,7 @@ def get_ships_arrives_today():
     print("-" * 119)
     input("enter to quit:")
 
+# To Export All Ships That Arrives Today Into CSV File
 def export_ships_arrives_today(path):
     data = Ship.get(arrival_date=todays_date)
     with open(f"{path}\\{random_value}.csv", "w", newline="") as file:
@@ -68,6 +70,7 @@ def export_ships_arrives_today(path):
 
     success_msg("Exported Successfully")
 
+# To Update Ship
 def update_ship_by_id():
     data = Ship.get()
     print("-" * 119)
@@ -128,7 +131,7 @@ def update_ship_by_id():
         Ship.update_by_id(id, status=status)
     success_msg(f"Ship with id {id} updated successfully!")
 
-
+# To Delete Ship
 def delete_ship_by_id():
     ship = Ship.get()
     if not ship:

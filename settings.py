@@ -1,6 +1,8 @@
+# This file contains the settings related to the program
 from db.connect import Database
 from db.models import BaseModel
 
+# Class For Migration
 class MigrationManager:
     @staticmethod
     def run():

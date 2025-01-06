@@ -1,3 +1,4 @@
+# Functions For Docking Management
 from db.models import DockingSchedule,Ship
 from datetime import datetime
 from helper import *
@@ -7,7 +8,7 @@ import csv
 random_value = uuid4()
 todays_date = datetime.now().strftime("%Y-%m-%d")
 
-
+# To Add New Docking Schedule
 def add_new_docking_schedule():
     clear_console()
     ships = Ship.get()
@@ -28,6 +29,7 @@ def add_new_docking_schedule():
 
     success_msg("Docking Schedule addedd successfully!")
 
+# To Get All Docking Schedule
 def get_all_docking_schedules():
     docking_schedules = DockingSchedule.get()
     print("-"*65)
@@ -37,6 +39,8 @@ def get_all_docking_schedules():
         show_docking_schedule_data(dock_schedule)
     print("-"*65)
     input("Enter to quit:")
+
+# To Get Todays Docking Schedule
 def get_todays_docking_schedules():
     docking_schedules = DockingSchedule.get(schedule_date=todays_date)
     if docking_schedules == ():
@@ -50,6 +54,7 @@ def get_todays_docking_schedules():
         print("-"*65)
     input("Enter to quit:")
 
+# To Export Todays Docking Schedule Into CSV File
 def export_todays_docking_schedule():
     docking_schedules = DockingSchedule.get(schedule_date=todays_date)
     path = input("Enter path >")
@@ -60,6 +65,7 @@ def export_todays_docking_schedule():
 
     success_msg("CSV exported successfully!")
 
+# To Export All docking Schedule Into CSV File
 def export_all_docking_schedule():
     docking_schedules = DockingSchedule.get()
     path = input("Enter path >")
@@ -70,6 +76,7 @@ def export_all_docking_schedule():
 
     success_msg("CSV exported successfully!")
 
+# To Update Docking Schedule
 def update_docking_schedule():
     docking_schedules = DockingSchedule.get()
     print("-"*65)
@@ -103,7 +110,8 @@ def update_docking_schedule():
         success_msg("Docking Schedule Updated Successfully!")
     else:
         warning_msg("Invalid Option!")
-    
+
+# To Delete Docking Schedule
 def delete_docking_schedule():
     docking_schedules = DockingSchedule.get()
     print("-"*65)

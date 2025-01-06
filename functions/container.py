@@ -1,7 +1,8 @@
+# Functions for container management
 from db.models import StorageZone, Container, Ship
-
 from helper import *
 
+# To Add New Container
 def add_new_container():
     weight = float(input("Weight (in tons) :"))
     storage_zone_id = int(input("Storage zone id :"))
@@ -25,7 +26,7 @@ def add_new_container():
         container = Container(weight=weight,storage_zone_id=storage_zone_id, ship_id=ship_id)
         container.save()
 
-
+# To Show All Containers
 def show_all_containers():
     containers = Container.get()
     print("-"*58)
@@ -36,6 +37,7 @@ def show_all_containers():
     print("-"*58)
     input("Enter to quit :")
     
+# To Update Contaienr
 def update_container():
     clear_console()
     containers = Container.get()
@@ -66,6 +68,7 @@ def update_container():
     else:
         warning_msg("Invalid Option!")
 
+# To Delete Container
 def delete_container():
     clear_console()
     containers = Container.get()

@@ -1,3 +1,4 @@
+# This File have many functions that used in this program
 RED = "\033[31m"
 GREEN = "\033[32m"
 YELLOW = "\033[33m"

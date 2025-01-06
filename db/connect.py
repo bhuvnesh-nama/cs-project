@@ -8,10 +8,12 @@ DATABASE = {
     "database": "port_management"
 }
 
+# for database operations
 class Database:
     _connection = None
     _cursor = None
 
+    # To connect
     @staticmethod
     def get_connection():
         if Database._connection is None:
@@ -29,6 +31,7 @@ class Database:
                 exit()
         return Database._connection
 
+    # To create cursor
     @staticmethod
     def cursor():
         if Database._cursor is None:
@@ -36,6 +39,7 @@ class Database:
                 Database._cursor = Database._connection.cursor()
         return Database._cursor
 
+    # To close connection
     @staticmethod
     def close_connection():
         if Database._connection and Database._connection.is_connected():
@@ -45,6 +49,7 @@ class Database:
             Database._cursor = None
             print("Database connection closed.")
 
+    # To commit in database
     @staticmethod
     def commit():
         Database._connection.commit()

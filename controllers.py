@@ -1,3 +1,4 @@
+# Controller Functions
 from functions.ship import *
 from functions.docking import *
 from functions.storage_zone import *
@@ -5,6 +6,7 @@ from functions.container import *
 
 from helper import clear_console,warning_msg
 
+# Ship Controller
 def ship_controller():
     while True:
         clear_console()
@@ -48,6 +50,7 @@ def ship_controller():
             clear_console()
             warning_msg("Invalid Option!")
 
+# Docking Controller
 def docking_controller():
     while True:
         clear_console()
@@ -87,6 +90,7 @@ def docking_controller():
         else:
             warning_msg("Invalid option!")
 
+# Storage Zone Controller
 def storage_zone_controller():
     while True:
         clear_console()
@@ -117,7 +121,8 @@ def storage_zone_controller():
             break
         else:
             warning_msg("Invalid Option!")
-            
+
+# Container Controller
 def container_controller():
     while True:
         clear_console()
