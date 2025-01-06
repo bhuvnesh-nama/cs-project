@@ -1,3 +1,4 @@
+# This file contains all the database related functions
 import mysql.connector
 from mysql.connector import Error
 
