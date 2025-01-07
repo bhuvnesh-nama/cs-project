@@ -28,6 +28,7 @@ def ship_controller():
         print()
         user = int(input("> "))
 
+        clear_console()
         if user == 1:
             add_new_ship()
         elif user == 2:
@@ -71,6 +72,7 @@ def docking_controller():
         print()
         user = int(input(">"))
 
+        clear_console()
         if user ==1:
             get_todays_docking_schedules()
         elif user == 2:
@@ -109,6 +111,7 @@ def storage_zone_controller():
 
         user = int(input(">"))
 
+        clear_console()
         if user == 1:
             add_new_storage_zone()
         elif user ==2:
@@ -141,6 +144,7 @@ def container_controller():
 
         user = int(input(">"))
 
+        clear_console()
         if user == 1:
             add_new_container()
         elif user == 2:

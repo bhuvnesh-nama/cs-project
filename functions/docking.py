@@ -100,11 +100,11 @@ def update_docking_schedule():
     elif option==2:
         status = int(input("Status\n1. Pending\n2. Docking\n3. Docked\n:"))
         if status == 1:
-            status == "Pending"
+            status = "Pending"
         elif status == 2:
-            status == "Docking"
+            status = "Docking"
         elif status == 3:
-            status == "Docked"
+            status = "Docked"
         DockingSchedule.update_by_id(id=id, status=status)
 
         success_msg("Docking Schedule Updated Successfully!")

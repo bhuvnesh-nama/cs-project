@@ -72,6 +72,7 @@ def export_ships_arrives_today(path):
 
 # To Update Ship
 def update_ship_by_id():
+    clear_console()
     data = Ship.get()
     print("-" * 119)
     print("|     id     |     name     |     weight     |     flag     |  capacity  | arrival_date | departure_date |   status   |")
@@ -133,14 +134,16 @@ def update_ship_by_id():
 
 # To Delete Ship
 def delete_ship_by_id():
-    ship = Ship.get()
-    if not ship:
+    clear_console()
+    ships = Ship.get()
+    if not ships:
         warning_msg("No ship found")
         return
     print("-" * 119)
     print("|     id     |     name     |     weight     |     flag     |  capacity  | arrival_date | departure_date |   status   |")
     print("-" * 119)
-    show_ship_data(ship[0])
+    for ship in ships:
+        show_ship_data(ship)
     print("-" * 119)
 
     id = int(input("Enter id >"))
